@@ -6,24 +6,38 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Integer> list = new ArrayList<>();
+        // Lager en integer array liste
 
+        ArrayList<Integer> unsorted = new ArrayList<>();
 
-        list.add(3);
-        list.add(7);
-        list.add(2);
-        list.add(11);
-        list.add(7);
-        list.add(4);
+        // Legger til masse random tall i listen
 
-        System.out.println(list);
+        unsorted.add(87);
+        unsorted.add(32);
+        unsorted.add(3);
+        unsorted.add(17);
+        unsorted.add(18);
+        unsorted.add(11);
+        unsorted.add(69);
+        unsorted.add(7);
+        unsorted.add(24);
+        unsorted.add(27);
+        unsorted.add(7);
+        unsorted.add(2);
+        unsorted.add(102);
+        unsorted.add(97);
+        unsorted.add(4);
 
-        ArrayList<Integer> sorted = sort.heapsort(list);
+        // Printer før / etter resultatet av listen
 
-        System.out.println(sorted);
+        System.out.println("Unsorted List: " + unsorted);
 
+        ArrayList<Integer> sorted = sort.heapsort(unsorted);
+
+        System.out.println("Sorted List" + sorted);
+
+        // Slutt
 
     }
-
 
 }

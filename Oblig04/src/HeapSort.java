@@ -1,38 +1,51 @@
-import no.uib.info233.heap.MaxHeap;
-
 import java.util.ArrayList;
 
-public class HeapSort implements MaxHeap {
+public class HeapSort implements IHeapSort {
 
+    /**
+     * Rekusiv methode som omstokker integerene i lisen i stigende rekkefølge
+     *
+     * @param arrayList liste som skal sorteres
+     * @param amount antall noder
+     * @param integers tallet som skal sorteres
+     */
+    public void heapShuffler(ArrayList<Integer> arrayList, int amount, int integers) {
 
-    private void heapify(ArrayList<Integer> arr, int n, int i) {
+        int largest = integers;
+        int leftNode = 2 * integers + 1;
+        int rightNode = 2 * integers + 2;
 
-        int largest = i;
-        int l = 2*i + 1;
-        int r = 2*i + 2;
+        if (leftNode < amount && arrayList.get(leftNode) > arrayList.get(largest)) {
+            largest = leftNode;
+        }
 
-        if (l < n && arr.get(l) > arr.get(largest))
-            largest = l;
+        if (rightNode < amount && arrayList.get(rightNode) > arrayList.get(largest)) {
+            largest = rightNode;
+        }
 
-        if (r < n && arr.get(r) > arr.get(largest))
-            largest = r;
+        if (largest != integers) {
+            int swap = arrayList.get(integers);
+            arrayList.set(integers, arrayList.get(largest));
+            arrayList.set(largest, swap);
 
-        if (largest != i) {
-            int swap = arr.get(i);
-            arr.set(i, arr.get(largest));
-            arr.set(largest, swap);
-
-            heapify(arr, n, largest);
+            heapShuffler(arrayList, amount, largest);
         }
     }
 
 
+    /**
+     * Sorterer en liste. Innparameter er den usorterte listen og returverdi er en
+     * sortert liste med samme element som den unsortedlist.
+     *
+     * @param unsortedlist usortert liste
+     * @return sortert liste
+     */
     public ArrayList<Integer> heapsort(ArrayList<Integer> unsortedlist) {
 
         int list = unsortedlist.size();
 
         for ( int i = list / 2 - 1; i >= 0; i-- ) {
-            heapify(unsortedlist, list, i);
+            heapShuffler(unsortedlist, list, i);
         }
 
         for (int i = list - 1; i > 0; i--) {
@@ -42,40 +55,11 @@ public class HeapSort implements MaxHeap {
             unsortedlist.set(0, unsortedlist.get(i));
             unsortedlist.set(i, temp);
 
-            heapify(unsortedlist, i, 0);
+            heapShuffler(unsortedlist, i, 0);
 
         }
 
         return unsortedlist;
     }
 
-    @Override
-    public void add(Comparable entry) {
-
-    }
-
-    @Override
-    public Comparable removeMax() {
-        return null;
-    }
-
-    @Override
-    public Comparable getMax() {
-        return null;
-    }
-
-    @Override
-    public Boolean isEmpty() {
-        return null;
-    }
-
-    @Override
-    public Integer getSize() {
-        return null;
-    }
-
-    @Override
-    public void clear() {
-
-    }
 }
